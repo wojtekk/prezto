@@ -11,3 +11,44 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# homebrew
+export HOMEBREW_GITHUB_API_TOKEN="313bc80fa48b8f0cb8e344c9fa15184e8a2e8a42"
+
+# AWS completion
+source /usr/local/share/zsh/site-functions/_aws
+
+# PHP
+export PATH="$(brew --prefix homebrew/php/php70)/bin:$PATH"
+
+# word navigation with arrows
+bindkey -e
+bindkey '\e\e[C' forward-word
+bindkey '\e\e[D' backward-word
+
+# NVM
+export NVM_DIR="/Users/wojciechkrawczyk/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# added by travis gem
+[ -f /Users/wojciechkrawczyk/.travis/travis.sh ] && source /Users/wojciechkrawczyk/.travis/travis.sh
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# RVM
+source /Users/wojciechkrawczyk/.rvm/scripts/rvm
+
+# Appends every command to the history file once it is executed
+setopt inc_append_history
+# Reloads the history whenever you use it
+setopt share_history
+
+#Github
+fpath=(~/.zsh/completions $fpath)
+autoload -U compinit && compinit
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# fix error in aws-shell
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
